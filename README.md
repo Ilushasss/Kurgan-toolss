@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИнструментАренда Курган — аренда строительного инструмента</title>
+<meta name="description" content="Аренда строительного инструмента в Кургане. Перфораторы, пилы, генераторы, леса. Доставка по городу за 2 часа.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #e8e8e8;
+    line-height: 1.6;
+    background: #0a0a0a;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+  /* Шапка */
+  header {
+    background: #000;
+    color: #fff;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #d4af37;
+    box-shadow: 0 2px 20px rgba(212,175,55,0.15);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .logo { font-size: 22px; font-weight: 700; color: #d4af37; letter-spacing: 0.5px; }
+  .logo span { color: #fff; }
+  .logo small { display: block; font-size: 11px; color: #888; font-weight: 400; letter-spacing: 1px; }
+  nav a {
+    color: #ccc;
+    text-decoration: none;
+    margin-left: 22px;
+    font-size: 15px;
+    transition: color .2s;
+  }
+  nav a:hover { color: #d4af37; }
+  .phone {
+    font-weight: 700;
+    color: #d4af37;
+    text-decoration: none;
+    border: 1px solid #d4af37;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all .2s;
+  }
+  .phone:hover { background: #d4af37; color: #000; }
+
+  /* Герой */
+  .hero {
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #0a0a0a 100%);
+    color: #fff;
+    padding: 90px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(212,175,55,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero .container { position: relative; z-index: 1; }
+  .hero h1 { font-size: 44px; margin-bottom: 18px; line-height: 1.2; }
+  .hero h1 span { color: #d4af37; text-shadow: 0 0 30px rgba(212,175,55,0.5); }
+  .hero p { font-size: 18px; color: #b0b0b0; max-width: 700px; margin: 0 auto 30px; }
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #d4af37, #f0c75e);
+    color: #000;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 4px 20px rgba(212,175,55,0.3);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,175,55,0.5); }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    margin-left: 12px;
+    box-shadow: none;
+  }
+  .btn-outline:hover { background: #d4af37; color: #000; }
+
+  /* Преимущества */
+  .features { padding: 70px 0; background: #0f0f0f; }
+  .section-title {
+    text-align: center;
+    font-size: 34px;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #d4af37;
+    margin: 14px auto 0;
+  }
+  .section-sub {
+    text-align: center;
+    color: #888;
+    margin-bottom: 45px;
+    font-size: 15px;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+  .feature {
+    background: linear-gradient(145deg, #1a1a1a, #111);
+    padding: 30px 22px;
+    border-radius: 12px;
+    border: 1px solid #2a2a2a;
+    text-align: center;
+    transition: border-color .3s, transform .3s;
+  }
+  .feature:hover { border-color: #d4af37; transform: translateY(-4px); }
+  .feature .icon { font-size: 38px; margin-bottom: 14px; }
+  .feature h3 { font-size: 18px; margin-bottom: 8px; color: #d4af37; }
+  .feature p { font-size: 14px; color: #999; }
+
+  /* Каталог */
+  .catalog { padding: 70px 0; background: #0a0a0a; }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 35px;
+  }
+  .filter-btn {
+    padding: 10px 22px;
+    border: 1px solid #333;
+    background: #151515;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #aaa;
+    transition: all .2s;
+  }
+  .filter-btn:hover { border-color: #d4af37; color: #d4af37; }
+  .filter-btn.active {
+    background: linear-gradient(135deg, #d4af37, #f0c75e);
+    border-color: #d4af37;
+    color: #000;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 26px;
+  }
+  .card {
+    background: linear-gradient(145deg, #161616, #0e0e0e);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #242424;
+    display: flex;
+    flex-direction: column;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: #d4af37;
+    box-shadow: 0 12px 40px rgba(212,175,55,0.2);
+  }
+  .card-img {
+    height: 190px;
+    background: #1a1a1a;
+    overflow: hidden;
+    position: relative;
+  }
+  .card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s;
+    filter: brightness(0.9) contrast(1.05);
+  }
+  .card:hover .card-img img { transform: scale(1.08); filter: brightness(1.05) contrast(1.1); }
+  .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+  .card-tag {
+    display: inline-block;
+    font-size: 11px;
+    background: rgba(212,175,55,0.12);
+    color: #d4af37;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    align-self: flex-start;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid rgba(212,175,55,0.3);
+  }
+  .card h3 { font-size: 17px; margin-bottom: 8px; color: #fff; }
+  .card .desc { font-size: 13px; color: #888; margin-bottom: 16px; flex: 1; }
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #242424;
+    padding-top: 14px;
+  }
+  .price { font-size: 21px; font-weight: 700; color: #d4af37; }
+  .price small { font-size: 12px; font-weight: 400; color: #777; }
+  .rent-btn {
+    background: transparent;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    padding: 9px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all .2s;
+  }
+  .rent-btn:hover { background: #d4af37; color: #000; }
+
+  /* Форма */
+  .order {
+    background: linear-gradient(180deg, #0f0f0f, #000);
+    padding: 70px 0;
+    border-top: 1px solid #242424;
+    border-bottom: 1px solid #242424;
+  }
+  .order .section-sub { color: #888; }
+  .form-wrap { max-width: 600px; margin: 0 auto; }
+  .form-row { margin-bottom: 18px; }
+  .form-row label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #bbb;
+  }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #141414;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+  }
+  .form-row input::placeholder, .form-row textarea::placeholder { color: #555; }
+  .form-row textarea { resize: vertical; min-height: 85px; }
+  .form-wrap .btn { width: 100%; margin-top: 8px; }
+
+  /* Подвал */
+  footer {
+    background: #000;
+    color: #888;
+    padding: 50px 0 20px;
+    font-size: 14px;
+    border-top: 1px solid #1a1a1a;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  .footer-grid h4 { color: #d4af37; margin-bottom: 14px; font-size: 16px; }
+  .footer-grid p, .footer-grid a {
+    color: #888;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+    transition: color .2s;
+  }
+  .footer-grid a:hover { color: #d4af37; }
+  .footer-grid .phone-foot { color: #d4af37; font-weight: 700; font-size: 16px; }
+  .copy {
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+    padding-top: 22px;
+    font-size: 13px;
+    color: #555;
+  }
+
+  /* Уведомление */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, #d4af37, #f0c75e);
+    color: #000;
+    padding: 16px 24px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(212,175,55,0.4);
+    transform: translateY(150%);
+    transition: transform .4s;
+    z-index: 999;
+    font-weight: 700;
+  }
+  .toast.show { transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 30px; }
+    nav { display: none; }
+    .btn-outline { margin-left: 0; margin-top: 12px; }
+    .phone { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div class="logo">Инструмент<span>Аренда</span><small>г. Курган</small></div>
+    <nav>
+      <a href="#features">Преимущества</a>
+      <a href="#catalog">Каталог</a>
+      <a href="#order">Заявка</a>
+    </nav>
+    <a href="tel:+79956749750" class="phone">📞 +7 (995) 674-97-50</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Аренда строительного инструмента <span>в Кургане</span></h1>
+    <p>Профессиональный инструмент от ведущих брендов. Выгоднее покупки — платите только за время работы. Доставка по Кургану и области.</p>
+    <a href="#catalog" class="btn">Смотреть каталог</a>
+    <a href="#order" class="btn btn-outline">Оставить заявку</a>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="container">
+    <h2 class="section-title">Почему выбирают нас</h2>
+    <p class="section-sub">Более 500 единиц инструмента в наличии в Кургане</p>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="icon">🚚</div>
+        <h3>Доставка за 2 часа</h3>
+        <p>Привезём инструмент прямо на объект в любом районе Кургана.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🛠️</div>
+        <h3>Проверенное качество</h3>
+        <p>Инструмент Bosch, Makita, DeWalt проходит регулярное ТО.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">💳</div>
+        <h3>Гибкая оплата</h3>
+        <p>Аренда от суток. Скидки при заказе от 7 дней.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📞</div>
+        <h3>Поддержка 24/7</h3>
+        <p>Поможем подобрать инструмент под вашу задачу.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="catalog" id="catalog">
+  <div class="container">
+    <h2 class="section-title">Каталог инструмента</h2>
+    <p class="section-sub">Цены указаны за сутки аренды, самовывоз в Кургане</p>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Все</button>
+      <button class="filter-btn" data-filter="electric">Электроинструмент</button>
+      <button class="filter-btn" data-filter="power">Силовая техника</button>
+      <button class="filter-btn" data-filter="measure">Измерительный</button>
+      <button class="filter-btn" data-filter="other">Прочее</button>
+    </div>
+
+    <div class="cards" id="cards">
+
+      <div class="card" data-category="electric">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&q=80" alt="Перфоратор Bosch" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Электроинструмент</span>
+          <h3>Перфоратор Bosch GBH 2-26</h3>
+          <p class="desc">Мощность 800 Вт. Для бетона, кирпича и камня. В комплекте буры.</p>
+          <div class="card-footer">
+            <div class="price">800 ₽ <small>/ сутки</small></div>
+            <button class="rent-btn" data-tool="Перфоратор Bosch GBH 2-26">Арендовать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-category="electric">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&q=80" alt="Циркулярная пила" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Электроинструмент</span>
+          <h3>Циркулярная пила Makita</h3>
+          <p class="desc">Диск 190 мм, плавная регулировка глубины пропила. Для дерева.</p>
+          <div class="card-footer">
+            <div class="price">700 ₽ <small>/ сутки</small></div>
+            <button class="rent-btn" data-tool="Циркулярная пила Makita">Арендовать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-category="electric">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1621478264020-7c1c6f8b0f3c?w=600&q=80" alt="УШМ болгарка" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Электроинструмент</span>
+          <h3>УШМ (болгарка) DeWalt 125</h3>
+          <p class="desc">Мощность 1400 Вт, диаметр диска 125 мм. Резка металла и камня.</p>
+          <div class="card-footer">
+            <div class="price">450 ₽ <small>/ сутки</small></div>
+            <button class="rent-btn" data-tool="УШМ DeWalt 125">Арендовать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-category="power">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1618090584176-7132b9911fd0?w=600&q=80" alt="Бензогенератор" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Силовая техника</span>
+          <h3>Бензогенератор 5 кВт</h3>
+          <p class="desc">Автономное электроснабжение на объекте. Расход топлива 2,5 л/ч.</p>
+          <div class="card-footer">
+            <div class="price">1500 ₽ <small>/ сутки</small></div>
+            <button class="rent-btn" data-tool="Бензогенератор 5 кВт">Арендовать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-category="power">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1581141849291-1125c7b692b5?w=600&q=80" alt="Отбойный молоток" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Силовая техника</span>
+          <h3>Отбойный молоток Bosch</h3>
+          <p class="desc">Электрический, 1500 Вт. Для демонтажных работ и сноса.</p>
+          <div class="card-footer">
+            <div class="price">1200 ₽ <small>/ сутки</small></div>
+            <button class="rent-btn" data-tool="Отбойный молоток Bosch">Арендовать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-category="measure">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&q=80" alt="Лазерный нивелир" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Измерительный</span>
+          <h3>Лазерный нивелир</h3>
+          <p class="desc">Построение горизонтальных и вертикальных плоскостей. Дальность 30 м.</p>
+          <div class="card-footer">
+            <div class="price">600 ₽ <small>/ сутки</small></div>
+            <button class="rent-btn" data-tool="Лазерный нивелир">Арендовать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-category="measure">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&q=80" alt="Тепловизор" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Измерительный</span>
+          <h3>Тепловизор</h3>
+          <p class="desc">Поиск утечек тепла, диагностика электрики. Разрешение 220×160.</p>
+          <div class="card-footer">
+            <div class="price">1000 ₽ <small>/ сутки</small></div>
+            <button class="rent-btn" data-tool="Тепловизор">Арендовать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-category="other">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Строительные леса" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Прочее</span>
+          <h3>Строительные леса</h3>
+          <p class="desc">Комплект 2×6 м с настилом. Оцинкованная сталь, устойчивые.</p>
+          <div class="card-footer">
+            <div class="price">900 ₽ <small>/ сутки</small></div>
+            <button class="rent-btn" data-tool="Строительные леса">Арендовать</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" data-category="other">
+        <div class="card-img">
+          <img src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?w=600&q=80" alt="Виброплита" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Прочее</span>
+          <h3>Виброплита бензиновая</h3>
+          <p class="desc">Уплотнение грунта и асфальта. Вес 80 кг, двигатель 5,5 л.с.</p>
+          <div class="card-footer">
+            <div class="price">1100 ₽ <small>/ сутки</small></div>
+            <button class="rent-btn" data-tool="Виброплита бензиновая">Арендовать</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="order" id="order">
+  <div class="container">
+    <h2 class="section-title">Оставить заявку</h2>
+    <p class="section-sub">Перезвоним в течение 15 минут и уточним детали</p>
+    <div class="form-wrap">
+      <form id="orderForm">
+        <div class="form-row">
+          <label for="name">Ваше имя *</label>
+          <input type="text" id="name" required placeholder="Иван">
+        </div>
+        <div class="form-row">
+          <label for="phone">Телефон *</label>
+          <input type="tel" id="phone" required placeholder="+7 (___) ___-__-__">
+        </div>
+        <div class="form-row">
+          <label for="tool">Инструмент</label>
+          <input type="text" id="tool" placeholder="Например: Перфоратор Bosch">
+        </div>
+        <div class="form-row">
+          <label for="period">Срок аренды</label>
+          <select id="period">
+            <option>1 сутки</option>
+            <option>2–3 суток</option>
+            <option>до 7 суток</option>
+            <option>более 7 суток</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="comment">Комментарий</label>
+          <textarea id="comment" placeholder="Адрес доставки в Кургане, пожелания..."></textarea>
+        </div>
+        <button type="submit" class="btn">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>ИнструментАренда Курган</h4>
+        <p>Профессиональный инструмент в аренду с доставкой по Кургану и Курганской области.</p>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <a href="tel:+79956749750" class="phone-foot">📞 +7 (995) 674-97-50</a>
+        <a href="mailto:info@instrument-rent45.ru">✉️ info@instrument-rent45.ru</a>
+        <p>📍 г. Курган, ул. Куйбышева, 25</p>
+      </div>
+      <div>
+        <h4>Режим работы</h4>
+        <p>Пн–Пт: 8:00 – 20:00</p>
+        <p>Сб–Вс: 9:00 – 18:00</p>
+        <p>Выдача инструмента — ежедневно</p>
+      </div>
+    </div>
+    <div class="copy">© 2026 ИнструментАренда Курган. Все права защищены.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Заявка отправлена! Мы вам перезвоним.</div>
+
+<script>
+  // Фильтрация каталога
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Кнопка "Арендовать" — подставляет инструмент в форму
+  const toolInput = document.getElementById('tool');
+  document.querySelectorAll('.rent-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      toolInput.value = btn.dataset.tool;
+      document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('name').focus();
+    });
+  });
+
+  // Отправка формы
+  const toast = document.getElementById('toast');
+  document.getElementById('orderForm').addEventListener('submit', e => {
+    e.preventDefault();
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+    e.target.reset();
+  });
+</script>
+
+</body>
+</html>
